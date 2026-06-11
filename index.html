@@ -968,6 +968,19 @@
   });
   const dots=[...dotsBox.children];
 
+  // ── Réception commandes iPad via API ──
+  var lastRemoteSlide = -1;
+  setInterval(function(){
+    fetch('/api/slide').then(function(r){return r.json()}).then(function(d){
+      if(typeof d.index === 'number' && d.index !== cur && d.index !== lastRemoteSlide){
+        lastRemoteSlide = d.index;
+        go(d.index);
+      }
+      lastRemoteSlide = d.index;
+    }).catch(function(){});
+  }, 400);
+
+
   function initDeck(){
     slides.forEach(slide=>{
       slide.querySelectorAll('table tr').forEach((tr,i)=>{
@@ -1298,6 +1311,7 @@
     resetCounters(next);
 
     cur=nextIndex;
+  try{fetch('/api/slide',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({index:nextIndex})})}catch(e){}
     updateChrome();
     animateSlide(next);
 
