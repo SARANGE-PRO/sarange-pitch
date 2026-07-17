@@ -1,0 +1,226 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Les variables --font-* sont injectées par next/font sur <html>. */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-night);
+    color: var(--color-ivory);
+    font-family: var(--font-chakra);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    min-height: 100vh;
+    /* Nappe de profondeur : deux lueurs discrètes (or / teal) sur la nuit de jungle */
+    background-image:
+      radial-gradient(ellipse 80% 55% at 15% -5%, rgba(201, 162, 39, 0.08), transparent 60%),
+      radial-gradient(ellipse 70% 50% at 100% 0%, rgba(23, 163, 152, 0.07), transparent 55%);
+    background-attachment: fixed;
+  }
+
+  ::selection {
+    background: rgba(201, 162, 39, 0.28);
+    color: var(--color-ivory);
+  }
+
+  /* Accessibilité — focus clavier visible partout */
+  :focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-fraunces);
+    font-optical-sizing: auto;
+  }
+}
+
+@layer components {
+  /* Treillis thaïlandais (kranok) en filigrane doré — texture de fond discrète */
+  .kranok {
+    position: relative;
+    isolation: isolate;
+  }
+  .kranok::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image: url('/patterns/kranok.svg');
+    background-size: 340px;
+    opacity: 0.06;
+    pointer-events: none;
+  }
+
+  /* Étiquette mono en capitales — eyebrow / métadonnées */
+  .eyebrow {
+    font-family: var(--font-plex-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-teal);
+  }
+
+  .rule {
+    height: 1px;
+    background: var(--line);
+    border: 0;
+  }
+
+  /* Effet de « scan » — herbier numérique, sur les héros de fiche */
+  .scan-overlay {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    mix-blend-mode: screen;
+  }
+  .scan-overlay::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 22%;
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      rgba(23, 163, 152, 0.16),
+      transparent
+    );
+    animation: scanline 2.2s ease-in-out infinite;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .container-editorial {
+    width: 100%;
+    max-width: var(--container);
+    margin-inline: auto;
+    padding-inline: 24px;
+  }
+}
+
+/* ---------------------------------------------------------------- Leaflet */
+.leaflet-container {
+  background: var(--color-night);
+  font-family: var(--font-chakra);
+}
+.leaflet-container .leaflet-control-attribution {
+  background: rgba(11, 26, 21, 0.7);
+  color: var(--color-sand);
+  font-size: 10px;
+}
+.leaflet-container .leaflet-control-attribution a {
+  color: var(--color-teal);
+}
+.leaflet-bar a {
+  background: var(--color-lacquer);
+  color: var(--color-ivory);
+  border-color: var(--line);
+}
+.leaflet-bar a:hover {
+  background: var(--color-lacquer-2);
+}
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  background: var(--color-lacquer);
+  color: var(--color-ivory);
+  border: 1px solid var(--line);
+  box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.8);
+}
+.leaflet-popup-content-wrapper {
+  border-radius: var(--radius-lg);
+}
+.leaflet-popup-content {
+  margin: 12px 14px;
+}
+.leaflet-container a.leaflet-popup-close-button {
+  color: var(--color-sand);
+}
+
+/* Marqueurs pulsants dorés / teal */
+.km-marker {
+  position: relative;
+  display: block;
+  width: 14px;
+  height: 14px;
+}
+.km-marker::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: var(--color-gold);
+  box-shadow: 0 0 10px 2px rgba(201, 162, 39, 0.7);
+}
+.km-marker::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 9999px;
+  border: 1px solid var(--color-gold);
+  opacity: 0.6;
+  animation: pulseMarker 2.4s ease-in-out infinite;
+}
+.km-marker.km-teal::before {
+  background: var(--color-teal);
+  box-shadow: 0 0 10px 2px rgba(23, 163, 152, 0.7);
+}
+.km-marker.km-teal::after {
+  border-color: var(--color-teal);
+}
+.km-marker.km-active {
+  transform: scale(1.25);
+}
+@media (prefers-reduced-motion: reduce) {
+  .km-marker::after {
+    animation: none;
+  }
+}
+
+/* Keyframes utilisées en CSS brut (indépendantes des utilitaires Tailwind) */
+@keyframes scanline {
+  0% {
+    transform: translateY(-120%);
+  }
+  100% {
+    transform: translateY(520%);
+  }
+}
+@keyframes pulseMarker {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.55;
+    transform: scale(1.35);
+  }
+}
+
+/* Respect strict de la préférence système */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .scan-overlay::after {
+    display: none;
+  }
+}

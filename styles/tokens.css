@@ -1,0 +1,38 @@
+/**
+ * Design tokens — charte « Lanna Futur »
+ * Variables CSS de couleur, typographie et espacement.
+ * Importées avant globals.css dans app/layout.tsx.
+ */
+:root {
+  /* ---- Couleurs : fonds ---- */
+  --color-night: #0b1a15; /* Nuit de jungle — fond principal */
+  --color-lacquer: #122a21; /* Laque profonde — cartes / surfaces */
+  --color-lacquer-2: #0f2119; /* Profondeur */
+
+  /* ---- Couleurs : textes ---- */
+  --color-ivory: #f4eedd; /* Ivoire soie */
+  --color-sand: #a9b5ac; /* Sable atténué */
+
+  /* ---- Couleurs : accents ---- */
+  --color-gold: #c9a227; /* Or de temple */
+  --color-teal: #17a398; /* Teal récif */
+
+  /* ---- Dangerosité ---- */
+  --color-safe: #4c9a6a; /* Jade */
+  --color-caution: #d0912b; /* Ambre */
+  --color-danger: #b8302a; /* Laque rouge */
+
+  /* ---- Structure ---- */
+  --line: rgba(244, 238, 221, 0.1);
+  --line-strong: rgba(244, 238, 221, 0.18);
+  --gold-soft: rgba(201, 162, 39, 0.14);
+  --teal-soft: rgba(23, 163, 152, 0.14);
+
+  /* ---- Espacement / rythme ---- */
+  --radius: 4px;
+  --radius-lg: 10px;
+  --container: 1180px;
+  --header-h: 64px;
+
+  color-scheme: dark;
+}
