@@ -73,13 +73,39 @@ export function GET(req: Request) {
           <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
             <div
               style={{
-                width: 18,
-                height: 18,
-                background: '#C9A227',
-                transform: 'rotate(45deg)',
-                borderRadius: 3,
+                position: 'relative',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: 36,
+                height: 36,
+                borderRadius: 999,
+                border: '3px solid #0B1A15',
+                background:
+                  'linear-gradient(to bottom, #C9A227 0%, #C9A227 50%, #F4EEDD 50%, #DBD3BC 100%)',
               }}
-            />
+            >
+              <div
+                style={{
+                  position: 'absolute',
+                  left: 0,
+                  right: 0,
+                  top: 16,
+                  height: 4,
+                  background: '#0B1A15',
+                }}
+              />
+              <div
+                style={{
+                  display: 'flex',
+                  width: 13,
+                  height: 13,
+                  borderRadius: 999,
+                  background: '#F4EEDD',
+                  border: '3px solid #0B1A15',
+                }}
+              />
+            </div>
             <span style={{ color: '#F4EEDD' }}>
               KOIKA<span style={{ color: '#C9A227' }}>SAMUI</span>
             </span>

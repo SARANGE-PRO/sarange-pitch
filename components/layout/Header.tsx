@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { NAV_LINKS, isActive } from './nav-links';
 import { MobileNav } from './MobileNav';
+import { PokeBall } from '@/components/brand/PokeBall';
 import { cn } from '@/lib/cn';
 
 export function Header() {
@@ -24,10 +25,7 @@ export function Header() {
           className="group flex items-center gap-2.5"
           aria-label="KoikaSamui — accueil"
         >
-          <span
-            className="h-3.5 w-3.5 rotate-45 rounded-[2px] bg-gold shadow-[0_0_12px_rgba(201,162,39,0.6)] transition-transform group-hover:rotate-[135deg]"
-            aria-hidden
-          />
+          <PokeBall className="h-7 w-7 drop-shadow-[0_0_10px_rgba(201,162,39,0.45)] transition-transform duration-300 group-hover:rotate-[20deg]" />
           <span className="font-display text-lg font-semibold tracking-tight text-ivory">
             Koika<span className="text-gold">Samui</span>
           </span>
@@ -57,7 +55,7 @@ export function Header() {
 
         <button
           type="button"
-          className="flex h-9 w-9 items-center justify-center rounded-[var(--radius)] border border-line text-ivory md:hidden"
+          className="flex h-9 w-9 items-center justify-center rounded-[var(--radius)] border border-line bg-lacquer text-ivory md:hidden"
           aria-label={open ? 'Fermer le menu' : 'Ouvrir le menu'}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}

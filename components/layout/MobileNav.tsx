@@ -1,8 +1,11 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
 import { NAV_LINKS, isActive } from './nav-links';
+import { PokeBall } from '@/components/brand/PokeBall';
 import { cn } from '@/lib/cn';
 
 export function MobileNav({
@@ -14,11 +17,26 @@ export function MobileNav({
   pathname: string;
   onClose: () => void;
 }) {
-  return (
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
+  // Verrouille le défilement quand le menu est ouvert.
+  useEffect(() => {
+    if (!open) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [open]);
+
+  if (!mounted) return null;
+
+  return createPortal(
     <AnimatePresence>
       {open && (
         <motion.div
-          className="fixed inset-0 z-40 md:hidden"
+          className="fixed inset-0 z-[90] md:hidden"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -27,36 +45,52 @@ export function MobileNav({
           <button
             aria-label="Fermer le menu"
             onClick={onClose}
-            className="absolute inset-0 bg-night/80 backdrop-blur-sm"
+            className="absolute inset-0 bg-night/90 backdrop-blur-sm"
           />
           <motion.nav
-            className="kranok absolute right-0 top-0 flex h-full w-72 max-w-[80vw] flex-col gap-1 border-l border-line bg-lacquer p-6 pt-24"
+            style={{ backgroundColor: '#0F2119' }}
+            className="absolute right-0 top-0 flex h-full w-[84%] max-w-xs flex-col border-l border-gold/20 p-6 shadow-[-24px_0_70px_rgba(0,0,0,0.7)]"
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'tween', duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
           >
-            {NAV_LINKS.map((link) => {
-              const activeLink = isActive(pathname, link.href);
-              return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={onClose}
-                  className={cn(
-                    'rounded-[var(--radius)] px-4 py-3 font-display text-2xl transition-colors',
-                    activeLink
-                      ? 'text-gold'
-                      : 'text-ivory hover:bg-white/5 hover:text-gold',
-                  )}
-                >
-                  {link.label}
-                </Link>
-              );
-            })}
+            <div className="mb-8 flex items-center gap-2.5">
+              <PokeBall className="h-7 w-7" />
+              <span className="font-display text-lg font-semibold text-ivory">
+                Koika<span className="text-gold">Samui</span>
+              </span>
+            </div>
+
+            <div className="flex flex-col gap-1">
+              {NAV_LINKS.map((link) => {
+                const activeLink = isActive(pathname, link.href);
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    onClick={onClose}
+                    aria-current={activeLink ? 'page' : undefined}
+                    className={cn(
+                      'rounded-[var(--radius)] px-4 py-3.5 font-display text-2xl transition-colors',
+                      activeLink
+                        ? 'bg-gold/12 text-gold'
+                        : 'text-ivory hover:bg-white/5 hover:text-gold',
+                    )}
+                  >
+                    {link.label}
+                  </Link>
+                );
+              })}
+            </div>
+
+            <p className="mt-auto font-mono text-[11px] leading-relaxed text-sand/70">
+              Bestiaire de terrain — Golfe de Thaïlande.
+            </p>
           </motion.nav>
         </motion.div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body,
   );
 }

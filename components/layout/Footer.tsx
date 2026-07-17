@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { NAV_LINKS } from './nav-links';
+import { PokeBall } from '@/components/brand/PokeBall';
 import { getAllSpecies } from '@/lib/species';
 
 export function Footer() {
@@ -9,7 +10,7 @@ export function Footer() {
       <div className="container-editorial grid grid-cols-1 gap-10 py-14 sm:grid-cols-2 lg:grid-cols-4">
         <div className="sm:col-span-2 lg:col-span-2">
           <div className="flex items-center gap-2.5">
-            <span className="h-3 w-3 rotate-45 rounded-[2px] bg-gold" aria-hidden />
+            <PokeBall className="h-6 w-6" />
             <span className="font-display text-lg font-semibold text-ivory">
               Koika<span className="text-gold">Samui</span>
             </span>
