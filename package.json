@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "vercel-build": "npm run fetch-images || true && next build",
     "start": "next start",
     "lint": "next lint",
     "fetch-images": "tsx scripts/fetch-images.ts"
