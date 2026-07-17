@@ -11,15 +11,29 @@ import { cn } from '@/lib/cn';
 export function Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   // Ferme le menu à chaque navigation.
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
 
+  // Header en verre « scroll-aware » : plus opaque une fois défilé.
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   return (
-    <header className="sticky top-0 z-50 h-[var(--header-h)] border-b border-line bg-night/80 backdrop-blur-md">
-      <div className="container-editorial flex h-full items-center justify-between">
+    <header
+      className={cn(
+        'glass-bar pt-safe sticky top-0 z-50',
+        scrolled && 'glass-bar-scrolled',
+      )}
+    >
+      <div className="container-editorial flex h-[var(--header-h)] items-center justify-between">
         <Link
           href="/"
           className="group flex items-center gap-2.5"

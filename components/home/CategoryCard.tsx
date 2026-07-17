@@ -11,7 +11,7 @@ export function CategoryCard({
   return (
     <Link
       href={`/especes?categorie=${category.key}`}
-      className="group relative flex flex-col gap-3 overflow-hidden rounded-[var(--radius-lg)] border border-line bg-lacquer p-5 transition-all duration-200 hover:-translate-y-1 hover:border-gold/40 hover:shadow-gold-halo focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+      className="group relative flex flex-col gap-3 overflow-hidden rounded-[var(--radius-lg)] border border-line bg-lacquer p-5 transition-all duration-200 hover:-translate-y-1 hover:border-gold/40 hover:shadow-gold-halo active:scale-[0.985] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
     >
       <div className="flex items-start justify-between">
         <span className="text-3xl transition-transform duration-300 group-hover:scale-110" aria-hidden>

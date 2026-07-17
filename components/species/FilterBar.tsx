@@ -51,7 +51,7 @@ export function FilterBar({
     filter.categories.length + filter.dangers.length + filter.zones.length;
 
   return (
-    <div className="sticky top-[calc(var(--header-h)+8px)] z-30 rounded-[var(--radius-lg)] border border-line bg-lacquer shadow-card">
+    <div className="sticky top-[calc(var(--header-h)_+_env(safe-area-inset-top)_+_8px)] z-30 rounded-[var(--radius-lg)] border border-line bg-lacquer shadow-card">
       <div className="flex flex-col gap-4 p-4 sm:p-5">
         {/* Recherche — toujours visible */}
         <div className="flex items-center gap-3">

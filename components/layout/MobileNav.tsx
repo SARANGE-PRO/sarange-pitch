@@ -48,8 +48,12 @@ export function MobileNav({
             className="absolute inset-0 bg-night/90 backdrop-blur-sm"
           />
           <motion.nav
-            style={{ backgroundColor: '#0F2119' }}
-            className="absolute right-0 top-0 flex h-full w-[84%] max-w-xs flex-col border-l border-gold/20 p-6 shadow-[-24px_0_70px_rgba(0,0,0,0.7)]"
+            style={{
+              backgroundColor: '#0F2119',
+              paddingTop: 'calc(1.5rem + env(safe-area-inset-top))',
+              paddingBottom: 'calc(1.5rem + env(safe-area-inset-bottom))',
+            }}
+            className="absolute right-0 top-0 flex h-full w-[84%] max-w-xs flex-col border-l border-gold/20 px-6 shadow-[-24px_0_70px_rgba(0,0,0,0.7)]"
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
             exit={{ x: '100%' }}

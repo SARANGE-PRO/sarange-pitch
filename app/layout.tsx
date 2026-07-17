@@ -77,6 +77,11 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   themeColor: '#0B1A15',
   colorScheme: 'dark',
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false, // ressenti « vraie app » : pas de pinch-zoom
+  viewportFit: 'cover', // contenu jusqu'aux bords (encoche) en standalone
 };
 
 export default function RootLayout({

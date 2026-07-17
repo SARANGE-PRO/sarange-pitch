@@ -28,7 +28,7 @@ export function Chip({
       type="button"
       aria-pressed={active}
       className={cn(
-        'select-none rounded-full border px-3 py-1.5 font-ui text-[13px] font-medium transition-all duration-150',
+        'select-none rounded-full border px-3 py-1.5 font-ui text-[13px] font-medium transition-all duration-150 active:scale-95',
         active
           ? activeTone[tone]
           : 'border-line text-sand hover:border-ivory/30 hover:text-ivory',

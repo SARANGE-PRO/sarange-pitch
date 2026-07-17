@@ -6,7 +6,7 @@ import { getAllSpecies } from '@/lib/species';
 export function Footer() {
   const total = getAllSpecies().length;
   return (
-    <footer className="mt-24 border-t border-line">
+    <footer className="pb-safe mt-24 border-t border-line">
       <div className="container-editorial grid grid-cols-1 gap-10 py-14 sm:grid-cols-2 lg:grid-cols-4">
         <div className="sm:col-span-2 lg:col-span-2">
           <div className="flex items-center gap-2.5">
