@@ -1,6 +1,7 @@
 'use client';
 
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import type { PhotoCredit } from '@/lib/types';
 
 interface Props {
@@ -14,6 +15,8 @@ interface Props {
 /** Visionneuse plein écran : photo en grand (object-contain) + crédit + navigation. */
 export function PhotoLightbox({ photos, index, alt, onClose, onIndex }: Props) {
   const closeRef = useRef<HTMLButtonElement>(null);
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
   const open = index !== null;
   const count = photos.length;
 
@@ -42,11 +45,11 @@ export function PhotoLightbox({ photos, index, alt, onClose, onIndex }: Props) {
     };
   }, [open, go, onClose]);
 
-  if (index === null) return null;
+  if (index === null || !mounted) return null;
   const photo = photos[index];
   if (!photo) return null;
 
-  return (
+  return createPortal(
     <div
       role="dialog"
       aria-modal="true"
@@ -120,6 +123,7 @@ export function PhotoLightbox({ photos, index, alt, onClose, onIndex }: Props) {
       >
         ✕
       </button>
-    </div>
+    </div>,
+    document.body,
   );
 }
