@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import type { Category, Species } from '@/lib/types';
 import { SITES, ISLANDS } from '@/data/locations';
 import { CATEGORIES } from '@/data/taxonomy';
@@ -10,8 +10,27 @@ import type { MapPoint } from './IslandMap';
 
 const CAP = 6;
 
+const CARTE_KEY = 'koika:carte-cat';
+
 export function CarteExplorer({ species }: { species: Species[] }) {
   const [category, setCategory] = useState<Category | 'all'>('all');
+
+  // Restaure/persiste le filtre de catégorie (continuité au retour).
+  useEffect(() => {
+    try {
+      const v = sessionStorage.getItem(CARTE_KEY);
+      if (v) setCategory(v as Category | 'all');
+    } catch {
+      /* ignore */
+    }
+  }, []);
+  useEffect(() => {
+    try {
+      sessionStorage.setItem(CARTE_KEY, category);
+    } catch {
+      /* ignore */
+    }
+  }, [category]);
 
   const matches = (s: Species) => category === 'all' || s.category === category;
 
