@@ -5,6 +5,7 @@ import Image from 'next/image';
 import type { Species } from '@/lib/types';
 import { SpeciesImage } from './SpeciesImage';
 import { PhotoLightbox } from './PhotoLightbox';
+import { BLUR_DATA_URL } from '@/lib/images';
 
 /** Galerie photo d'une fiche espèce : clic pour agrandir, crédits visibles (CC). */
 export function SpeciesGallery({ species }: { species: Species }) {
@@ -30,6 +31,8 @@ export function SpeciesGallery({ species }: { species: Species }) {
               fill
               priority
               sizes="(max-width: 1024px) 92vw, 560px"
+              placeholder="blur"
+              blurDataURL={BLUR_DATA_URL}
               className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
             />
             <span className="pointer-events-none absolute right-3 top-3 flex items-center gap-1.5 rounded-full border border-line bg-night/70 px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-ivory backdrop-blur-sm">
@@ -79,6 +82,8 @@ export function SpeciesGallery({ species }: { species: Species }) {
                 alt={`${alt} — ${i + 2}`}
                 fill
                 sizes="120px"
+                placeholder="blur"
+                blurDataURL={BLUR_DATA_URL}
                 className="object-cover"
               />
             </button>

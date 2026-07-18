@@ -21,6 +21,16 @@ export function specimenNumber(slug: string): number {
   return slugIndex.get(slug) ?? 0;
 }
 
+/** Espèces précédente / suivante dans le catalogue (navigation de fiche). */
+export function getAdjacentSpecies(slug: string): {
+  prev?: Species;
+  next?: Species;
+} {
+  const i = allSpecies.findIndex((s) => s.slug === slug);
+  if (i === -1) return {};
+  return { prev: allSpecies[i - 1], next: allSpecies[i + 1] };
+}
+
 export function getAllSpecies(): Species[] {
   return allSpecies;
 }

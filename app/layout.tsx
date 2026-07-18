@@ -5,6 +5,7 @@ import './globals.css';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { ServiceWorkerRegister } from '@/components/pwa/ServiceWorkerRegister';
+import { ScrollToTop } from '@/components/ui/ScrollToTop';
 
 const fraunces = Fraunces({
   subsets: ['latin'],
@@ -104,6 +105,7 @@ export default function RootLayout({
         <Header />
         <main id="contenu">{children}</main>
         <Footer />
+        <ScrollToTop />
         <ServiceWorkerRegister />
       </body>
     </html>

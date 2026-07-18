@@ -5,6 +5,7 @@ import {
   getAllSlugs,
   getSpeciesBySlug,
   getSimilarSpecies,
+  getAdjacentSpecies,
   specimenNumber,
 } from '@/lib/species';
 import { getSpeciesSpots, getSitesForSpecies } from '@/lib/geo';
@@ -66,6 +67,7 @@ export default function SpeciesDetailPage({
   const similar = getSimilarSpecies(species);
   const spots = getSpeciesSpots(species);
   const sites = getSitesForSpecies(species);
+  const { prev, next } = getAdjacentSpecies(species.slug);
 
   return (
     <article className="container-editorial py-10 sm:py-14">
@@ -169,11 +171,49 @@ export default function SpeciesDetailPage({
         </section>
       )}
 
-      <div className="mt-16 flex justify-center">
-        <Button href="/especes" variant="outline">
-          ← Retour au catalogue
-        </Button>
-      </div>
+      {/* ------------------------------------------- NAV SPÉCIMEN PRÉC/SUIV */}
+      <nav
+        className="mt-16 grid grid-cols-2 items-stretch gap-3 border-t border-line pt-8 sm:grid-cols-[1fr_auto_1fr]"
+        aria-label="Navigation entre espèces"
+      >
+        {prev ? (
+          <Link
+            href={`/especes/${prev.slug}`}
+            className="group flex flex-col rounded-[var(--radius-lg)] border border-line bg-lacquer/50 p-4 transition-colors hover:border-gold/40 active:scale-[0.99]"
+          >
+            <span className="font-mono text-[10px] uppercase tracking-wider text-sand">
+              ← Précédent
+            </span>
+            <span className="mt-1 truncate font-display text-sm font-semibold text-ivory group-hover:text-gold">
+              {prev.commonName}
+            </span>
+          </Link>
+        ) : (
+          <span />
+        )}
+
+        <div className="col-span-2 flex items-center justify-center sm:col-span-1">
+          <Button href="/especes" variant="outline" size="sm">
+            Catalogue
+          </Button>
+        </div>
+
+        {next ? (
+          <Link
+            href={`/especes/${next.slug}`}
+            className="group flex flex-col items-end rounded-[var(--radius-lg)] border border-line bg-lacquer/50 p-4 text-right transition-colors hover:border-gold/40 active:scale-[0.99]"
+          >
+            <span className="font-mono text-[10px] uppercase tracking-wider text-sand">
+              Suivant →
+            </span>
+            <span className="mt-1 w-full truncate font-display text-sm font-semibold text-ivory group-hover:text-gold">
+              {next.commonName}
+            </span>
+          </Link>
+        ) : (
+          <span />
+        )}
+      </nav>
     </article>
   );
 }

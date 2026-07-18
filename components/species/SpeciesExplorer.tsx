@@ -199,11 +199,23 @@ export function SpeciesExplorer({
         onReset={() => setFilter(EMPTY_FILTER)}
       />
 
+      <p className="sr-only" role="status" aria-live="polite">
+        {filtered.length} espèce{filtered.length > 1 ? 's' : ''} affichée
+        {filtered.length > 1 ? 's' : ''} sur {species.length}.
+      </p>
+
       {filtered.length === 0 ? (
-        <div className="rounded-[var(--radius-lg)] border border-dashed border-line py-20 text-center font-mono text-sm text-sand">
-          Aucun spécimen ne correspond à ces filtres.
-          <br />
-          Essayez d’en retirer un.
+        <div className="flex flex-col items-center gap-4 rounded-[var(--radius-lg)] border border-dashed border-line py-20 text-center">
+          <p className="font-mono text-sm text-sand">
+            Aucun spécimen ne correspond à ces filtres.
+          </p>
+          <button
+            type="button"
+            onClick={() => setFilter(EMPTY_FILTER)}
+            className="rounded-full border border-gold/50 px-4 py-2 font-ui text-sm text-gold transition-colors hover:bg-gold/10 active:scale-95"
+          >
+            Réinitialiser les filtres
+          </button>
         </div>
       ) : (
         <div className="flex flex-col gap-10" onClickCapture={handleNavigateAway}>

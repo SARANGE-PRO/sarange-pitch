@@ -58,6 +58,7 @@ export function FilterBar({
           <SearchInput
             value={filter.query}
             onChange={(e) => onQuery(e.target.value)}
+            onClear={() => onQuery('')}
             placeholder="Rechercher (nom commun ou latin)…"
             aria-label="Rechercher une espèce"
           />

@@ -2,6 +2,7 @@ import Image from 'next/image';
 import type { Species } from '@/lib/types';
 import { CATEGORY_BY_KEY } from '@/data/taxonomy';
 import { primaryPhoto } from '@/lib/species';
+import { BLUR_DATA_URL } from '@/lib/images';
 import { cn } from '@/lib/cn';
 
 const glow: Record<Species['danger'], string> = {
@@ -52,6 +53,8 @@ export function SpeciesImage({
             fill
             sizes={sizes}
             priority={priority}
+            placeholder="blur"
+            blurDataURL={BLUR_DATA_URL}
             className="object-cover"
           />
           <div
