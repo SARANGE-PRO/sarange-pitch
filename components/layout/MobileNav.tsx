@@ -3,9 +3,9 @@
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import Link from 'next/link';
+import Image from 'next/image';
 import { AnimatePresence, motion } from 'framer-motion';
 import { NAV_LINKS, isActive } from './nav-links';
-import { PokeBall } from '@/components/brand/PokeBall';
 import { cn } from '@/lib/cn';
 
 export function MobileNav({
@@ -59,11 +59,15 @@ export function MobileNav({
             exit={{ x: '100%' }}
             transition={{ type: 'tween', duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className="mb-8 flex items-center gap-2.5">
-              <PokeBall className="h-7 w-7" />
-              <span className="font-display text-lg font-semibold text-ivory">
-                KoïKo<span className="text-gold">Samui</span>
-              </span>
+            <div className="mb-8">
+              <Image
+                src="/brand/logo.png"
+                alt="KoïKoSamui"
+                width={800}
+                height={343}
+                unoptimized
+                className="h-9 w-auto"
+              />
             </div>
 
             <div className="flex flex-col gap-1">

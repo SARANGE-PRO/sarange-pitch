@@ -3,9 +3,9 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import Image from 'next/image';
 import { NAV_LINKS, isActive } from './nav-links';
 import { MobileNav } from './MobileNav';
-import { PokeBall } from '@/components/brand/PokeBall';
 import { cn } from '@/lib/cn';
 
 export function Header() {
@@ -36,13 +36,18 @@ export function Header() {
       <div className="container-editorial flex h-[var(--header-h)] items-center justify-between">
         <Link
           href="/"
-          className="group flex items-center gap-2.5"
+          className="group flex items-center"
           aria-label="KoïKoSamui — accueil"
         >
-          <PokeBall className="h-7 w-7 drop-shadow-[0_0_10px_rgba(201,162,39,0.45)] transition-transform duration-300 group-hover:rotate-[20deg]" />
-          <span className="font-display text-lg font-semibold tracking-tight text-ivory">
-            KoïKo<span className="text-gold">Samui</span>
-          </span>
+          <Image
+            src="/brand/logo.png"
+            alt="KoïKoSamui"
+            width={800}
+            height={343}
+            priority
+            unoptimized
+            className="h-9 w-auto drop-shadow-[0_2px_8px_rgba(0,0,0,0.55)] transition-transform duration-300 group-hover:scale-[1.04] sm:h-10"
+          />
         </Link>
 
         <nav className="hidden items-center gap-1 md:flex" aria-label="Navigation principale">
