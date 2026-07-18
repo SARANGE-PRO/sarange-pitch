@@ -105,6 +105,7 @@ app/
   page.tsx              accueil (hero constellation, catégories, signatures)
   especes/page.tsx      liste filtrable (recherche + filtres + URL query params)
   especes/[slug]/       fiche détail (galerie, jauge, mini-carte, similaires)
+  biomes/page.tsx       exploration par habitat (jungle, récif, grand large…)
   carte/page.tsx        carte interactive de l'archipel
   a-propos/page.tsx     méthodologie, sources, crédits photo
   api/og/route.tsx      images Open Graph dynamiques par espèce

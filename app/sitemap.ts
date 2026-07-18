@@ -5,7 +5,7 @@ const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ?? 'https://koikosamui.vercel.app';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticRoutes = ['', '/especes', '/carte', '/a-propos'].map((path) => ({
+  const staticRoutes = ['', '/especes', '/biomes', '/carte', '/a-propos'].map((path) => ({
     url: `${siteUrl}${path}`,
     lastModified: new Date(),
     changeFrequency: 'monthly' as const,
