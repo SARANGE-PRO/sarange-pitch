@@ -56,6 +56,9 @@ Sans elle, les sons proviennent d'iNaturalist — aucune configuration requise.
   près de l'archipel, affichées sur la carte des fiches (build → `data/observations.json`).
 - **Cris & chants** — bouton « Écouter le cri » sur les fiches, sons libres
   d'iNaturalist (+ xeno-canto optionnel), crédités (build → `data/sounds.json`).
+- **Boussole de terrain** — Device Orientation + Géolocalisation (natif,
+  gratuit) : pointe vers le lieu d'observation le plus proche et gère les
+  espèces présentes à plusieurs endroits (repli boussole statique sans capteur).
 - **Activité & heure locale** — section « Actives en ce moment » selon l'heure
   de Koh Samui (UTC+7), mise en avant de la faune nocturne la nuit.
 - **PWA hors-ligne renforcée** — le service worker met aussi en cache les

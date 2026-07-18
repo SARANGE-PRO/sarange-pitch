@@ -14,6 +14,7 @@ import { inaturalistSearchUrl } from '@/lib/inaturalist';
 import { CATEGORY_BY_KEY, DANGER_BY_LEVEL, ZONE_BY_KEY } from '@/data/taxonomy';
 import { SpeciesHero } from '@/components/species/SpeciesHero';
 import { SpeciesGrid } from '@/components/species/SpeciesGrid';
+import { SpeciesCompass } from '@/components/species/SpeciesCompass';
 import { MapView } from '@/components/map/MapView';
 import { Button } from '@/components/ui/Button';
 
@@ -166,6 +167,10 @@ export default function SpeciesDetailPage({
                 </li>
               ))}
             </ul>
+          </div>
+
+          <div className="mt-6">
+            <SpeciesCompass spots={spots} name={species.commonName} />
           </div>
         </section>
       )}
