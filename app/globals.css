@@ -204,6 +204,64 @@
   animation: eq 0.7s ease-in-out infinite;
 }
 
+/* ----------------------------------------- Fiche espèce « carnet de luxe » */
+@layer utilities {
+  /* Texte doré « gilded » — or chaud plaqué (titres de fiche) */
+  .gilded {
+    background-image: linear-gradient(
+      176deg,
+      #f6e6a0 0%,
+      #e6c34e 36%,
+      #c9a227 70%,
+      #a9821e 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    filter: drop-shadow(0 1px 10px rgba(201, 162, 39, 0.18));
+  }
+
+  /* Ambiance : vignette vert forêt (clair au centre, presque noir aux bords) */
+  .field-vignette {
+    background: radial-gradient(
+      118% 88% at 50% 20%,
+      #17392c 0%,
+      #0e2219 36%,
+      #081209 76%,
+      #050f0b 100%
+    );
+  }
+
+  /* Texture topographique organique, très discrète */
+  .field-topo {
+    background-image: url('/patterns/topo.svg');
+    background-size: 680px;
+    background-repeat: repeat;
+    opacity: 0.04;
+    mix-blend-mode: screen;
+  }
+
+  /* Cadre organique — coins asymétriques doux (casse le « bloc numérique ») */
+  .frame-organic {
+    border-radius: 28px 10px 28px 10px;
+  }
+  .frame-organic-sm {
+    border-radius: 16px 6px 16px 6px;
+  }
+
+  /* Lettrine de carnet — première lettre en or chaud, serif */
+  .dropcap::first-letter {
+    float: left;
+    margin: 0.02em 0.14em 0 0;
+    font-family: var(--font-fraunces);
+    font-weight: 300;
+    font-size: 3.4em;
+    line-height: 0.78;
+    color: var(--color-gold-warm);
+  }
+}
+
 /* ---------------------------------------------------------------- Leaflet */
 .leaflet-container {
   background: var(--color-night);

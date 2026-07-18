@@ -15,7 +15,9 @@
 
   /* ---- Couleurs : accents ---- */
   --color-gold: #c9a227; /* Or de temple */
+  --color-gold-warm: #e6c34e; /* Or chaud — hautes lumières dorées (titres gilded) */
   --color-teal: #17a398; /* Teal récif */
+  --color-emeraude: #35c88a; /* Émeraude vif — indicateurs positifs (Inoffensif) */
 
   /* ---- Dangerosité ---- */
   --color-safe: #4c9a6a; /* Jade */

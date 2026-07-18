@@ -13,6 +13,9 @@ import { getObservations } from '@/lib/observations';
 import { inaturalistSearchUrl } from '@/lib/inaturalist';
 import { CATEGORY_BY_KEY, DANGER_BY_LEVEL, ZONE_BY_KEY } from '@/data/taxonomy';
 import { SpeciesHero } from '@/components/species/SpeciesHero';
+import { SpeciesMasthead } from '@/components/species/SpeciesMasthead';
+import { FieldBackdrop } from '@/components/species/FieldBackdrop';
+import { CategoryIcon } from '@/components/species/CategoryIcon';
 import { SpeciesGrid } from '@/components/species/SpeciesGrid';
 import { SpeciesCompass } from '@/components/species/SpeciesCompass';
 import { MapView } from '@/components/map/MapView';
@@ -79,56 +82,65 @@ export default function SpeciesDetailPage({
   };
 
   return (
-    <article className="container-editorial py-10 sm:py-14">
-      <nav className="mb-8 flex items-center gap-2 font-mono text-xs text-sand">
+    <article className="container-editorial py-8 sm:py-12">
+      <FieldBackdrop />
+
+      <nav className="flex items-center gap-2 font-mono text-xs text-sand">
         <Link href="/especes" className="transition-colors hover:text-gold">
           ← Toutes les espèces
         </Link>
       </nav>
 
+      <div className="mt-6 mb-9 sm:mt-8 sm:mb-12">
+        <SpeciesMasthead />
+      </div>
+
       <SpeciesHero species={species} />
 
       {/* -------------------------------------------------- DESCRIPTION */}
-      <section className="mt-16 grid grid-cols-1 gap-10 lg:grid-cols-[1fr_260px]">
+      <section className="mt-14 grid grid-cols-1 gap-10 lg:grid-cols-[1fr_280px]">
         <div>
           <p className="eyebrow">Notes de terrain</p>
           <h2 className="mt-2 font-display text-2xl font-semibold text-ivory">
             À propos de l’espèce
           </h2>
-          <p className="mt-5 text-[17px] leading-[1.75] text-ivory/90">
+          <p className="dropcap mt-5 text-[17px] leading-[1.8] text-ivory/90">
             {species.longDescription}
           </p>
         </div>
 
-        <aside className="h-fit rounded-[var(--radius-lg)] border border-line bg-lacquer/50 p-5">
-          <p className="eyebrow !text-sand">Fiche technique</p>
-          <dl className="mt-4 flex flex-col gap-3 font-mono text-xs">
-            <div className="flex justify-between gap-4">
-              <dt className="text-sand">Spécimen</dt>
-              <dd className="text-ivory">N° {String(no).padStart(3, '0')}</dd>
-            </div>
-            <div className="flex justify-between gap-4">
-              <dt className="text-sand">Catégorie</dt>
-              <dd className="text-ivory">{cat.label}</dd>
-            </div>
-            <div className="flex justify-between gap-4">
-              <dt className="text-sand">Nom latin</dt>
-              <dd className="text-right italic text-ivory">{species.latinName}</dd>
-            </div>
-            <div className="flex justify-between gap-4">
-              <dt className="text-sand">Dangerosité</dt>
-              <dd className="text-ivory">{DANGER_BY_LEVEL[species.danger].label}</dd>
-            </div>
-            <div className="flex justify-between gap-4">
-              <dt className="text-sand">Activité</dt>
-              <dd className="capitalize text-ivory">{species.activity}</dd>
-            </div>
-            <div className="flex justify-between gap-4">
-              <dt className="text-sand">Zones</dt>
-              <dd className="text-right text-ivory">
-                {species.zones.map((z) => ZONE_BY_KEY[z].label).join(', ')}
-              </dd>
-            </div>
+        <aside className="h-fit overflow-hidden rounded-[var(--radius-lg)] border border-gold/20 bg-lacquer/50 shadow-card">
+          <div className="flex items-center justify-between gap-3 border-b border-line bg-gold/[0.05] px-5 py-3">
+            <span className="font-mono text-[10px] font-medium uppercase tracking-[0.16em] text-gold/80">
+              Fiche technique
+            </span>
+            <span className="shrink-0 font-mono text-[10px] uppercase tracking-[0.18em] text-sand/55">
+              KKS-{String(no).padStart(3, '0')}
+            </span>
+          </div>
+          <dl className="divide-y divide-line/70 px-5 font-mono text-xs">
+            <SheetRow label="Spécimen">N° {String(no).padStart(3, '0')}</SheetRow>
+            <SheetRow label="Catégorie">
+              <span className="inline-flex items-center gap-1.5">
+                <CategoryIcon
+                  category={species.category}
+                  className="h-3.5 w-3.5 text-gold/80"
+                />
+                {cat.label}
+              </span>
+            </SheetRow>
+            <SheetRow label="Nom latin">
+              <span className="italic">{species.latinName}</span>
+            </SheetRow>
+            <SheetRow label="Dangerosité">
+              {DANGER_BY_LEVEL[species.danger].label}
+            </SheetRow>
+            <SheetRow label="Activité">
+              <span className="capitalize">{species.activity}</span>
+            </SheetRow>
+            <SheetRow label="Zones">
+              {species.zones.map((z) => ZONE_BY_KEY[z].label).join(', ')}
+            </SheetRow>
           </dl>
         </aside>
       </section>
@@ -305,5 +317,21 @@ export default function SpeciesDetailPage({
         )}
       </nav>
     </article>
+  );
+}
+
+/** Ligne de la fiche technique (étiquette spécimen). */
+function SheetRow({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="flex items-start justify-between gap-4 py-3">
+      <dt className="shrink-0 text-sand">{label}</dt>
+      <dd className="max-w-[62%] text-right text-ivory">{children}</dd>
+    </div>
   );
 }

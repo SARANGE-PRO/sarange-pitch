@@ -23,7 +23,9 @@ const config: Config = {
         sand: '#A9B5AC', // Sable atténué — texte secondaire
         // Accents
         gold: '#C9A227', // Or de temple
+        'gold-warm': '#E6C34E', // Or chaud — hautes lumières gilded
         teal: '#17A398', // Teal récif
+        emeraude: '#35C88A', // Émeraude vif — indicateurs positifs (Inoffensif)
         // Dangerosité
         jade: '#4C9A6A', // Sûr
         'amber-warn': '#D0912B', // Prudence

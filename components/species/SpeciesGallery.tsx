@@ -23,7 +23,7 @@ export function SpeciesGallery({ species }: { species: Species }) {
             type="button"
             onClick={() => setIndex(0)}
             aria-label={`Agrandir la photo de ${species.commonName}`}
-            className="group relative aspect-[4/3] w-full cursor-zoom-in overflow-hidden rounded-[var(--radius-lg)] border border-line focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+            className="frame-organic group relative aspect-[4/3] w-full cursor-zoom-in overflow-hidden border border-gold/20 shadow-[0_28px_64px_-30px_rgba(0,0,0,0.9)] ring-1 ring-inset ring-white/[0.04] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
           >
             <Image
               src={main.url}
@@ -58,7 +58,7 @@ export function SpeciesGallery({ species }: { species: Species }) {
         </>
       ) : (
         <>
-          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[var(--radius-lg)] border border-line">
+          <div className="frame-organic relative aspect-[4/3] w-full overflow-hidden border border-gold/20 shadow-[0_28px_64px_-30px_rgba(0,0,0,0.9)]">
             <SpeciesImage species={species} priority scan />
           </div>
           <figcaption className="font-mono text-[11px] leading-relaxed text-sand/70">
@@ -75,7 +75,7 @@ export function SpeciesGallery({ species }: { species: Species }) {
               type="button"
               onClick={() => setIndex(i + 1)}
               aria-label={`Photo ${i + 2} de ${species.commonName}`}
-              className="relative aspect-square cursor-zoom-in overflow-hidden rounded-[var(--radius)] border border-line focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+              className="frame-organic-sm relative aspect-square cursor-zoom-in overflow-hidden border border-gold/15 transition-colors hover:border-gold/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
             >
               <Image
                 src={photo.url}
