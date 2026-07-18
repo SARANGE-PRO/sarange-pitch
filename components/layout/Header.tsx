@@ -3,9 +3,9 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import Image from 'next/image';
 import { NAV_LINKS, isActive } from './nav-links';
 import { MobileNav } from './MobileNav';
+import { MascotWordmark } from '@/components/brand/MascotWordmark';
 import { cn } from '@/lib/cn';
 
 export function Header() {
@@ -39,14 +39,10 @@ export function Header() {
           className="group flex items-center"
           aria-label="KoïKoSamui — accueil"
         >
-          <Image
-            src="/brand/logo.png"
-            alt="KoïKoSamui"
-            width={800}
-            height={343}
+          <MascotWordmark
+            imgClass="h-11 transition-transform duration-300 group-hover:-translate-y-0.5"
+            textClass="text-lg"
             priority
-            unoptimized
-            className="h-9 w-auto drop-shadow-[0_2px_8px_rgba(0,0,0,0.55)] transition-transform duration-300 group-hover:scale-[1.04] sm:h-10"
           />
         </Link>
 

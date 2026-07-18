@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { getAllSpecies, getSpeciesBySlug, countByCategory } from '@/lib/species';
 import { CATEGORIES } from '@/data/taxonomy';
 import { SpeciesCard } from '@/components/species/SpeciesCard';
@@ -31,7 +32,7 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-gradient-to-r from-night via-transparent to-transparent" />
         </div>
 
-        <div className="container-editorial relative flex min-h-[82vh] flex-col justify-center py-24">
+        <div className="container-editorial relative grid min-h-[82vh] items-center gap-8 py-20 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 lg:py-24">
           <div className="max-w-2xl">
             <p className="eyebrow flex items-center gap-3 animate-fade-up">
               <span className="h-px w-7 bg-teal" />
@@ -81,6 +82,29 @@ export default function HomePage() {
                 <dd>lieux d’observation</dd>
               </div>
             </dl>
+          </div>
+
+          {/* Mascotte + mot-logo */}
+          <div className="relative flex flex-col items-center justify-center animate-fade-up">
+            <div
+              className="pointer-events-none absolute bottom-16 h-24 w-2/3 rounded-[50%] bg-[radial-gradient(ellipse,rgba(201,162,39,0.20),transparent_70%)] blur-2xl"
+              aria-hidden
+            />
+            <Image
+              src="/brand/mascot-lanterne.png"
+              alt="Mascotte KoïKoSamui : un naturaliste de terrain"
+              width={300}
+              height={560}
+              priority
+              unoptimized
+              className="relative h-[240px] w-auto drop-shadow-[0_30px_45px_rgba(0,0,0,0.55)] sm:h-[320px] lg:h-[440px]"
+            />
+            <div className="relative mt-3 text-center">
+              <p className="font-display text-3xl font-semibold tracking-tight text-ivory sm:text-4xl">
+                KoïKo<span className="text-gold">Samui</span>
+              </p>
+              <p className="eyebrow mt-1.5 text-center">Votre guide de terrain</p>
+            </div>
           </div>
         </div>
       </section>
