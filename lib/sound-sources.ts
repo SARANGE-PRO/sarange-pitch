@@ -55,14 +55,30 @@ export async function fetchInatSound(
   });
   if (!res.ok) throw new Error(`iNaturalist sounds → HTTP ${res.status}`);
   const data = await res.json();
+
+  // On garde le son au format le plus compatible (mp3/m4a > wav).
+  const order = ['.mp3', '.m4a', '.mpga', '.aac', '.ogg', '.wav'];
+  const rank = (u: string) => {
+    const l = u.toLowerCase();
+    const i = order.findIndex((ext) => l.includes(ext));
+    return i === -1 ? order.length : i;
+  };
+  const https = (u: string) =>
+    u.startsWith('//') ? `https:${u}` : u.replace(/^http:/, 'https:');
+
+  let best: SoundClip | null = null;
+  let bestRank = Infinity;
   for (const obs of data?.results ?? []) {
     for (const sound of obs?.sounds ?? []) {
       const file: string | undefined = sound?.file_url;
       const license: string | undefined =
         sound?.license_code ?? obs?.license_code;
-      if (file && license && CC.test(license)) {
-        return {
-          url: file,
+      if (!file || !license || !CC.test(license)) continue;
+      const r = rank(file);
+      if (r < bestRank) {
+        bestRank = r;
+        best = {
+          url: https(file),
           recordist: obs?.user?.name || obs?.user?.login || 'Observateur',
           license: fmtInatLicense(license),
           source: 'iNaturalist',
@@ -72,7 +88,7 @@ export async function fetchInatSound(
       }
     }
   }
-  return null;
+  return best;
 }
 
 /** Son depuis xeno-canto v3 (nécessite une clé gratuite). */

@@ -15,7 +15,13 @@ interface Spot {
   lat: number;
   lng: number;
 }
-type Status = 'idle' | 'locating' | 'ready' | 'denied' | 'error';
+type Status =
+  | 'idle'
+  | 'locating'
+  | 'ready'
+  | 'denied'
+  | 'unavailable'
+  | 'insecure';
 
 interface EnrichedSpot extends Spot {
   distanceKm: number;
@@ -39,9 +45,9 @@ export function SpeciesCompass({
     const any = e as unknown as { webkitCompassHeading?: number };
     let hd: number | null = null;
     if (typeof any.webkitCompassHeading === 'number') {
-      hd = any.webkitCompassHeading; // iOS (0 = Nord, horaire)
+      hd = any.webkitCompassHeading;
     } else if (e.absolute && typeof e.alpha === 'number') {
-      hd = (360 - e.alpha) % 360; // Android (orientation absolue)
+      hd = (360 - e.alpha) % 360;
     }
     if (hd !== null && !Number.isNaN(hd)) setHeading(hd);
   };
@@ -54,6 +60,16 @@ export function SpeciesCompass({
   };
 
   const activate = async () => {
+    // La géolocalisation exige un contexte sécurisé (HTTPS).
+    if (typeof window !== 'undefined' && window.isSecureContext === false) {
+      setStatus('insecure');
+      return;
+    }
+    if (!('geolocation' in navigator)) {
+      setStatus('unavailable');
+      return;
+    }
+
     // Permission capteur d'orientation (iOS).
     const DOE = window.DeviceOrientationEvent as unknown as {
       requestPermission?: () => Promise<'granted' | 'denied'>;
@@ -69,19 +85,25 @@ export function SpeciesCompass({
       /* pas d'orientation → boussole statique */
     }
 
-    if (!('geolocation' in navigator)) {
-      setStatus('error');
-      return;
-    }
     setStatus('locating');
-    watchId.current = navigator.geolocation.watchPosition(
-      (p) => {
-        setPos({ lat: p.coords.latitude, lng: p.coords.longitude });
-        setStatus('ready');
-      },
-      () => setStatus('denied'),
-      { enableHighAccuracy: true, timeout: 15000, maximumAge: 30000 },
-    );
+    const onOk = (p: GeolocationPosition) => {
+      setPos({ lat: p.coords.latitude, lng: p.coords.longitude });
+      setStatus('ready');
+    };
+    const onErr = (err: GeolocationPositionError) => {
+      setStatus(err.code === err.PERMISSION_DENIED ? 'denied' : 'unavailable');
+    };
+    // Fix immédiat, puis suivi.
+    navigator.geolocation.getCurrentPosition(onOk, onErr, {
+      enableHighAccuracy: true,
+      timeout: 15000,
+      maximumAge: 60000,
+    });
+    watchId.current = navigator.geolocation.watchPosition(onOk, () => {}, {
+      enableHighAccuracy: true,
+      timeout: 20000,
+      maximumAge: 30000,
+    });
   };
 
   useEffect(() => {
@@ -106,6 +128,15 @@ export function SpeciesCompass({
   const h = heading ?? 0;
   const far = nearest ? nearest.distanceKm > 300 : false;
 
+  const errorMessage =
+    status === 'denied'
+      ? 'Localisation refusée. Autorise-la dans les réglages du site pour boussoler vers les lieux d’observation.'
+      : status === 'insecure'
+        ? 'La boussole nécessite une connexion sécurisée (HTTPS).'
+        : status === 'unavailable'
+          ? 'Localisation indisponible sur cet appareil ou ce navigateur.'
+          : null;
+
   return (
     <div className="rounded-[var(--radius-lg)] border border-line bg-lacquer/40 p-5">
       <div className="flex items-center justify-between gap-3">
@@ -117,13 +148,13 @@ export function SpeciesCompass({
             Boussole de terrain
           </h3>
         </div>
-        {status === 'idle' && (
+        {(status === 'idle' || errorMessage) && (
           <button
             type="button"
             onClick={activate}
             className="rounded-full border border-gold/50 px-3 py-1.5 font-ui text-xs text-gold transition-colors hover:bg-gold/10 active:scale-95"
           >
-            Activer
+            {errorMessage ? 'Réessayer' : 'Activer'}
           </button>
         )}
       </div>
@@ -140,23 +171,29 @@ export function SpeciesCompass({
           Localisation en cours…
         </p>
       )}
-      {status === 'denied' && (
-        <p className="mt-3 text-xs leading-relaxed text-amber-warn">
-          Localisation refusée. Autorise-la dans ton navigateur pour utiliser la
-          boussole.
-        </p>
-      )}
-      {status === 'error' && (
-        <p className="mt-3 text-xs leading-relaxed text-amber-warn">
-          Géolocalisation indisponible sur cet appareil.
-        </p>
+      {errorMessage && (
+        <div className="mt-3">
+          <p className="text-xs leading-relaxed text-amber-warn">{errorMessage}</p>
+          <p className="mt-2 font-mono text-[11px] uppercase tracking-wider text-sand/70">
+            Lieux d’observation
+          </p>
+          <ul className="mt-1 flex flex-wrap gap-1.5">
+            {spots.map((s, i) => (
+              <li
+                key={`${s.name}-${i}`}
+                className="rounded-full border border-line px-2.5 py-1 font-mono text-[11px] text-sand"
+              >
+                {s.name}
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
 
       {status === 'ready' && nearest && (
         <div className="mt-4 flex flex-col items-center gap-5 sm:flex-row sm:items-start">
           {/* Cadran */}
           <div className="relative h-52 w-52 shrink-0 select-none rounded-full border-2 border-line bg-night/50">
-            {/* Rose des vents (suit le cap de l'appareil) */}
             <div
               className="absolute inset-0 transition-transform duration-150 ease-out"
               style={{ transform: `rotate(${-h}deg)` }}
@@ -175,7 +212,6 @@ export function SpeciesCompass({
               </span>
             </div>
 
-            {/* Repères des autres lieux */}
             {others.map((s, i) => (
               <div
                 key={`${s.name}-${i}`}
@@ -189,7 +225,6 @@ export function SpeciesCompass({
               </div>
             ))}
 
-            {/* Aiguille vers le plus proche */}
             <div
               className="absolute inset-0 transition-transform duration-150 ease-out"
               style={{ transform: `rotate(${nearest.bearing - h}deg)` }}
@@ -200,7 +235,6 @@ export function SpeciesCompass({
               </div>
             </div>
 
-            {/* Moyeu + info centrale */}
             <div className="absolute inset-0 flex flex-col items-center justify-center gap-0.5">
               <span className="h-2.5 w-2.5 rounded-full bg-gold shadow-[0_0_10px_rgba(201,162,39,0.7)]" />
               <span className="mt-2 font-display text-xl font-semibold text-ivory">
@@ -212,7 +246,7 @@ export function SpeciesCompass({
             </div>
           </div>
 
-          {/* Liste des lieux (le plus proche en tête) */}
+          {/* Liste des lieux */}
           <div className="w-full">
             {heading === null && (
               <p className="mb-2 font-mono text-[10px] leading-relaxed text-sand/70">
@@ -230,12 +264,10 @@ export function SpeciesCompass({
                   key={`${s.name}-${i}`}
                   className={cn(
                     'flex items-center justify-between gap-3 rounded-[var(--radius)] border px-3 py-2',
-                    i === 0
-                      ? 'border-gold/40 bg-gold/5'
-                      : 'border-line bg-night/30',
+                    i === 0 ? 'border-gold/40 bg-gold/5' : 'border-line bg-night/30',
                   )}
                 >
-                  <span className="flex items-center gap-2 min-w-0">
+                  <span className="flex min-w-0 items-center gap-2">
                     <span
                       className={cn(
                         'h-2 w-2 shrink-0 rounded-full',
