@@ -6,11 +6,12 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "vercel-build": "npm run fetch-images || true && npm run fetch-observations || true && next build",
+    "vercel-build": "npm run fetch-images || true && npm run fetch-observations || true && npm run fetch-sounds || true && next build",
     "start": "next start",
     "lint": "next lint",
     "fetch-images": "tsx scripts/fetch-images.ts",
-    "fetch-observations": "tsx scripts/fetch-observations.ts"
+    "fetch-observations": "tsx scripts/fetch-observations.ts",
+    "fetch-sounds": "tsx scripts/fetch-sounds.ts"
   },
   "dependencies": {
     "framer-motion": "^11.11.9",

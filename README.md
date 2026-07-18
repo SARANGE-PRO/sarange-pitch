@@ -38,17 +38,24 @@ npm run start      # sert le build
 npm run lint       # ESLint (next/core-web-vitals)
 npm run fetch-images        # importe les photos libres (Wikimedia)
 npm run fetch-observations  # importe les observations réelles (iNaturalist)
+npm run fetch-sounds        # importe les cris/chants (iNaturalist + xeno-canto)
 ```
 
 Sur Vercel, le script `vercel-build` enchaîne automatiquement
-`fetch-images`, `fetch-observations` puis `next build` (non-bloquant : un
-import qui échoue n'interrompt pas le déploiement).
+`fetch-images`, `fetch-observations`, `fetch-sounds` puis `next build`
+(non-bloquant : un import qui échoue n'interrompt pas le déploiement).
+
+Variable d'environnement **optionnelle** : `XENOCANTO_KEY` (clé gratuite
+[xeno-canto](https://xeno-canto.org)) pour de meilleurs chants d'oiseaux.
+Sans elle, les sons proviennent d'iNaturalist — aucune configuration requise.
 
 ### Données & API (toutes gratuites, sans clé)
 
 - **Wikimedia Commons** — photos libres créditées (build).
 - **iNaturalist** (`api.inaturalist.org`) — observations réelles géolocalisées
   près de l'archipel, affichées sur la carte des fiches (build → `data/observations.json`).
+- **Cris & chants** — bouton « Écouter le cri » sur les fiches, sons libres
+  d'iNaturalist (+ xeno-canto optionnel), crédités (build → `data/sounds.json`).
 - **Activité & heure locale** — section « Actives en ce moment » selon l'heure
   de Koh Samui (UTC+7), mise en avant de la faune nocturne la nuit.
 - **PWA hors-ligne renforcée** — le service worker met aussi en cache les

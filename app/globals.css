@@ -185,6 +185,25 @@
   }
 }
 
+/* Égaliseur du lecteur de cri */
+@keyframes eq {
+  0%,
+  100% {
+    transform: scaleY(0.25);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+.eq-bar {
+  width: 3px;
+  height: 14px;
+  transform-origin: bottom;
+  background: var(--color-teal);
+  border-radius: 2px;
+  animation: eq 0.7s ease-in-out infinite;
+}
+
 /* ---------------------------------------------------------------- Leaflet */
 .leaflet-container {
   background: var(--color-night);

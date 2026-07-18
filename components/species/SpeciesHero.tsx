@@ -1,14 +1,17 @@
 import Link from 'next/link';
 import type { Species } from '@/lib/types';
 import { SpeciesGallery } from './SpeciesGallery';
+import { SoundButton } from './SoundButton';
 import { DangerGauge } from '@/components/ui/DangerGauge';
 import { ZoneTag } from '@/components/ui/Badge';
 import { CATEGORY_BY_KEY } from '@/data/taxonomy';
 import { specimenNumber } from '@/lib/species';
+import { getSound } from '@/lib/sounds';
 
 export function SpeciesHero({ species }: { species: Species }) {
   const cat = CATEGORY_BY_KEY[species.category];
   const no = specimenNumber(species.slug);
+  const sound = getSound(species.slug);
 
   return (
     <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-12">
@@ -36,6 +39,12 @@ export function SpeciesHero({ species }: { species: Species }) {
         <p className="mt-5 text-[15px] leading-relaxed text-sand">
           {species.shortNote}
         </p>
+
+        {sound && (
+          <div className="mt-5">
+            <SoundButton sound={sound} name={species.commonName} />
+          </div>
+        )}
 
         <div className="mt-7 rounded-[var(--radius-lg)] border border-line bg-lacquer/60 p-5">
           <DangerGauge level={species.danger} />

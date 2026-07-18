@@ -66,6 +66,15 @@ export interface Observation {
   placeGuess?: string;
 }
 
+/** Enregistrement sonore (cri / chant) d'une espèce. */
+export interface SoundClip {
+  url: string; // fichier audio (mp3/m4a/wav)
+  recordist: string;
+  license: string; // ex: "CC BY-NC"
+  source: 'xeno-canto' | 'iNaturalist';
+  sourceUrl: string; // page d'origine
+}
+
 export interface CategoryMeta {
   key: Category;
   label: string;
