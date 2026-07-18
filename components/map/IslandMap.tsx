@@ -20,6 +20,12 @@ export interface MapPoint {
   species?: { name: string; slug: string }[];
   /** libellé de repli si la liste d'espèces est tronquée */
   moreLabel?: string;
+  /** libellé du lien (défaut « Voir la fiche → ») */
+  hrefLabel?: string;
+  /** lien externe (nouvel onglet) plutôt que navigation interne */
+  external?: boolean;
+  /** vignette (observation iNaturalist) */
+  photoUrl?: string;
 }
 
 function FitBounds({ points }: { points: MapPoint[] }) {
@@ -75,6 +81,14 @@ export default function IslandMap({
             active={p.id === activeId}
           >
             <div className="min-w-[170px] max-w-[230px]">
+              {p.photoUrl && (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={p.photoUrl}
+                  alt=""
+                  className="mb-2 h-24 w-full rounded object-cover"
+                />
+              )}
               <p className="font-display text-sm font-semibold text-ivory">
                 {p.name}
               </p>
@@ -100,14 +114,24 @@ export default function IslandMap({
                   )}
                 </ul>
               )}
-              {p.href && (
-                <Link
-                  href={p.href}
-                  className="mt-2 inline-block font-mono text-[11px] uppercase tracking-wider text-gold hover:underline"
-                >
-                  Voir la fiche →
-                </Link>
-              )}
+              {p.href &&
+                (p.external ? (
+                  <a
+                    href={p.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-2 inline-block font-mono text-[11px] uppercase tracking-wider text-gold hover:underline"
+                  >
+                    {p.hrefLabel ?? 'Voir →'}
+                  </a>
+                ) : (
+                  <Link
+                    href={p.href}
+                    className="mt-2 inline-block font-mono text-[11px] uppercase tracking-wider text-gold hover:underline"
+                  >
+                    {p.hrefLabel ?? 'Voir la fiche →'}
+                  </Link>
+                ))}
             </div>
           </SiteMarker>
         ))}

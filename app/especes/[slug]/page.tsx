@@ -9,6 +9,8 @@ import {
   specimenNumber,
 } from '@/lib/species';
 import { getSpeciesSpots, getSitesForSpecies } from '@/lib/geo';
+import { getObservations } from '@/lib/observations';
+import { inaturalistSearchUrl } from '@/lib/inaturalist';
 import { CATEGORY_BY_KEY, DANGER_BY_LEVEL, ZONE_BY_KEY } from '@/data/taxonomy';
 import { SpeciesHero } from '@/components/species/SpeciesHero';
 import { SpeciesGrid } from '@/components/species/SpeciesGrid';
@@ -68,6 +70,12 @@ export default function SpeciesDetailPage({
   const spots = getSpeciesSpots(species);
   const sites = getSitesForSpecies(species);
   const { prev, next } = getAdjacentSpecies(species.slug);
+  const observations = getObservations(species.slug);
+
+  const fmtDate = (iso: string) => {
+    const [y, m, d] = iso.split('-');
+    return d && m && y ? `${d}/${m}/${y}` : iso;
+  };
 
   return (
     <article className="container-editorial py-10 sm:py-14">
@@ -109,6 +117,10 @@ export default function SpeciesDetailPage({
             <div className="flex justify-between gap-4">
               <dt className="text-sand">Dangerosité</dt>
               <dd className="text-ivory">{DANGER_BY_LEVEL[species.danger].label}</dd>
+            </div>
+            <div className="flex justify-between gap-4">
+              <dt className="text-sand">Activité</dt>
+              <dd className="capitalize text-ivory">{species.activity}</dd>
             </div>
             <div className="flex justify-between gap-4">
               <dt className="text-sand">Zones</dt>
@@ -155,6 +167,79 @@ export default function SpeciesDetailPage({
               ))}
             </ul>
           </div>
+        </section>
+      )}
+
+      {/* -------------------------------------- OBSERVATIONS RÉELLES (iNat) */}
+      {observations.length > 0 && (
+        <section className="mt-16">
+          <div className="flex flex-wrap items-end justify-between gap-3">
+            <div>
+              <p className="eyebrow flex items-center gap-2">
+                <span className="h-1.5 w-1.5 rounded-full bg-teal" />
+                Données réelles — iNaturalist
+              </p>
+              <h2 className="mt-2 font-display text-2xl font-semibold text-ivory">
+                Observations récentes près de l’archipel
+              </h2>
+            </div>
+            <a
+              href={inaturalistSearchUrl(species.latinName)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-mono text-[11px] uppercase tracking-wider text-gold hover:underline"
+            >
+              Tout voir sur iNaturalist →
+            </a>
+          </div>
+
+          <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[1.4fr_1fr]">
+            <MapView
+              points={observations.map((o) => ({
+                id: `obs-${o.id}`,
+                name: o.date ? `Observé le ${fmtDate(o.date)}` : 'Observation',
+                lat: o.lat,
+                lng: o.lng,
+                tone: 'teal' as const,
+                blurb: `${o.placeGuess ? `${o.placeGuess} · ` : ''}${o.observer} · ${o.license}`,
+                href: o.url,
+                external: true,
+                hrefLabel: 'Voir sur iNaturalist →',
+                photoUrl: o.photoUrl,
+              }))}
+              fit
+              wrapperClassName="h-[340px] sm:h-[420px]"
+            />
+            <ul className="flex flex-col gap-2">
+              {observations.slice(0, 6).map((o) => (
+                <li key={o.id}>
+                  <a
+                    href={o.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-between gap-3 rounded-[var(--radius)] border border-line bg-lacquer/40 p-3 transition-colors hover:border-teal/40"
+                  >
+                    <span className="min-w-0">
+                      <span className="block truncate text-sm text-ivory">
+                        {o.placeGuess || 'Lieu non précisé'}
+                      </span>
+                      <span className="font-mono text-[11px] text-sand">
+                        {o.date ? fmtDate(o.date) : '—'} · {o.observer}
+                      </span>
+                    </span>
+                    <span className="shrink-0 font-mono text-[10px] uppercase text-teal">
+                      {o.license}
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <p className="mt-4 font-mono text-[11px] leading-relaxed text-sand/70">
+            Observations et coordonnées : contributeurs iNaturalist (licences
+            Creative Commons). Les positions peuvent être floutées pour les
+            espèces sensibles.
+          </p>
         </section>
       )}
 

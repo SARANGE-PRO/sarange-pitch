@@ -1,16 +1,18 @@
 import type { PhotoCredit, Species } from '@/lib/types';
 import { speciesBase } from '@/data/species';
+import { ACTIVITY } from '@/data/activity';
 import photosJson from '@/data/photos.json';
 
 /**
  * Fusionne les données de base des espèces avec les photos récupérées
- * (data/photos.json, généré par scripts/fetch-images.ts).
+ * (data/photos.json, généré par scripts/fetch-images.ts) et le rythme d'activité.
  */
 const photos = photosJson as Record<string, PhotoCredit[]>;
 
 export const allSpecies: Species[] = speciesBase.map((base) => ({
   ...base,
   photos: photos[base.slug] ?? [],
+  activity: ACTIVITY[base.slug] ?? 'variable',
 }));
 
 const bySlug = new Map(allSpecies.map((s) => [s.slug, s]));

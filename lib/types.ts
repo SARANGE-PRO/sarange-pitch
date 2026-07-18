@@ -16,6 +16,9 @@ export type Category =
 /** Zone d'observation principale */
 export type ObservationZone = 'terre' | 'air' | 'recif' | 'large' | 'urbain';
 
+/** Rythme d'activité (pour la mise en avant selon l'heure de Koh Samui) */
+export type Activity = 'diurne' | 'nocturne' | 'crepusculaire' | 'variable';
+
 export interface PhotoCredit {
   url: string;
   photographer: string;
@@ -40,12 +43,27 @@ export interface Species {
   category: Category;
   danger: DangerLevel;
   zones: ObservationZone[];
+  /** rythme d'activité */
+  activity: Activity;
   /** emoji du carnet de terrain (repère visuel de secours) */
   icon: string;
   shortNote: string; // description courte (liste)
   longDescription: string; // description détaillée (fiche)
   photos: PhotoCredit[];
   observationSpots?: ObservationSpot[];
+}
+
+/** Observation réelle géolocalisée (iNaturalist). */
+export interface Observation {
+  id: number;
+  lat: number;
+  lng: number;
+  date: string; // YYYY-MM-DD (ou '')
+  observer: string;
+  license: string; // ex: "CC BY-NC"
+  url: string; // page de l'observation sur iNaturalist
+  photoUrl?: string;
+  placeGuess?: string;
 }
 
 export interface CategoryMeta {

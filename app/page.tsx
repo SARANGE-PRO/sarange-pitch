@@ -4,6 +4,7 @@ import { CATEGORIES } from '@/data/taxonomy';
 import { SpeciesCard } from '@/components/species/SpeciesCard';
 import { CategoryCard } from '@/components/home/CategoryCard';
 import { HeroConstellation } from '@/components/home/HeroConstellation';
+import { ActiveNow } from '@/components/home/ActiveNow';
 import { Button } from '@/components/ui/Button';
 
 const SIGNATURE = [
@@ -83,6 +84,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ------------------------------------------------- ACTIVES MAINTENANT */}
+      <ActiveNow species={all} />
 
       {/* ------------------------------------------------------- CATÉGORIES */}
       <section className="container-editorial py-20">

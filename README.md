@@ -36,8 +36,23 @@ Autres scripts :
 npm run build      # build de production
 npm run start      # sert le build
 npm run lint       # ESLint (next/core-web-vitals)
-npm run fetch-images   # importe les photos libres (voir ci-dessous)
+npm run fetch-images        # importe les photos libres (Wikimedia)
+npm run fetch-observations  # importe les observations réelles (iNaturalist)
 ```
+
+Sur Vercel, le script `vercel-build` enchaîne automatiquement
+`fetch-images`, `fetch-observations` puis `next build` (non-bloquant : un
+import qui échoue n'interrompt pas le déploiement).
+
+### Données & API (toutes gratuites, sans clé)
+
+- **Wikimedia Commons** — photos libres créditées (build).
+- **iNaturalist** (`api.inaturalist.org`) — observations réelles géolocalisées
+  près de l'archipel, affichées sur la carte des fiches (build → `data/observations.json`).
+- **Activité & heure locale** — section « Actives en ce moment » selon l'heure
+  de Koh Samui (UTC+7), mise en avant de la faune nocturne la nuit.
+- **PWA hors-ligne renforcée** — le service worker met aussi en cache les
+  photos déjà vues (plafond LRU) pour consulter les fiches en rando.
 
 ---
 
