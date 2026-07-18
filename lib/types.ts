@@ -1,5 +1,5 @@
 /**
- * Modèle de données — KoikaSamui
+ * Modèle de données — KoïKoSamui
  */
 
 /** 0 = sûr · 1 = prudence · 2 = dangereux */

@@ -30,21 +30,21 @@ const plexMono = IBM_Plex_Mono({
 });
 
 const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ?? 'https://koikasamui.vercel.app';
+  process.env.NEXT_PUBLIC_SITE_URL ?? 'https://koikosamui.vercel.app';
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  applicationName: 'KoikaSamui',
+  applicationName: 'KoïKoSamui',
   manifest: '/manifest.webmanifest',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'black-translucent',
-    title: 'KoikaSamui',
+    title: 'KoïKoSamui',
   },
   formatDetection: { telephone: false },
   title: {
-    default: 'KoikaSamui — Bestiaire de Koh Samui & des îles',
-    template: '%s · KoikaSamui',
+    default: 'KoïKoSamui — Bestiaire de Koh Samui & des îles',
+    template: '%s · KoïKoSamui',
   },
   description:
     "Bestiaire de terrain interactif de la faune de Koh Samui, Koh Phangan, Koh Tao et du parc marin d'Ang Thong : ~80 espèces, dangerosité, lieux d'observation et carte de l'archipel.",
@@ -58,18 +58,18 @@ export const metadata: Metadata = {
     'Koh Phangan',
     'Ang Thong',
   ],
-  authors: [{ name: 'KoikaSamui' }],
+  authors: [{ name: 'KoïKoSamui' }],
   openGraph: {
     type: 'website',
     locale: 'fr_FR',
-    siteName: 'KoikaSamui',
-    title: 'KoikaSamui — Bestiaire de Koh Samui & des îles',
+    siteName: 'KoïKoSamui',
+    title: 'KoïKoSamui — Bestiaire de Koh Samui & des îles',
     description:
       "La faune du Golfe de Thaïlande, de la canopée au récif : ~80 espèces classées par dangerosité et lieu d'observation.",
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'KoikaSamui — Bestiaire de Koh Samui & des îles',
+    title: 'KoïKoSamui — Bestiaire de Koh Samui & des îles',
     description:
       "La faune du Golfe de Thaïlande, de la canopée au récif : ~80 espèces classées par dangerosité et lieu d'observation.",
   },

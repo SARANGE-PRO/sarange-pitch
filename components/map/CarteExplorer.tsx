@@ -10,7 +10,7 @@ import type { MapPoint } from './IslandMap';
 
 const CAP = 6;
 
-const CARTE_KEY = 'koika:carte-cat';
+const CARTE_KEY = 'koiko:carte-cat';
 
 export function CarteExplorer({ species }: { species: Species[] }) {
   const [category, setCategory] = useState<Category | 'all'>('all');

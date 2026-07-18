@@ -15,7 +15,7 @@ import type { PhotoCredit } from '@/lib/types';
 const WIKIPEDIA_API = 'https://en.wikipedia.org/w/api.php';
 const COMMONS_API = 'https://commons.wikimedia.org/w/api.php';
 const USER_AGENT =
-  'KoikaSamui/1.0 (https://koikasamui.example; contact@sarange.fr) fetch-images script';
+  'KoiKoSamui/1.0 (https://koikosamui.example; contact@sarange.fr) fetch-images script';
 
 // Licences acceptées (réutilisation légale). On écarte le reste par prudence.
 const ACCEPTED_LICENSE = /(^cc)|(public domain)|(^pd)|(cc0)|(no restrictions)/i;

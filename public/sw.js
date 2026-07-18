@@ -1,6 +1,6 @@
-/* KoikaSamui — service worker (PWA installable + hors-ligne « jungle proof ») */
-const VERSION = 'koikasamui-v2';
-const IMG_CACHE = 'koika-img-v1';
+/* KoïKoSamui — service worker (PWA installable + hors-ligne « jungle proof ») */
+const VERSION = 'koikosamui-v3';
+const IMG_CACHE = 'koiko-img-v1';
 const KEEP = [VERSION, IMG_CACHE];
 const IMG_MAX = 120; // plafond LRU du cache images
 

@@ -6,7 +6,7 @@ import { DANGERS } from '@/data/taxonomy';
 export const metadata: Metadata = {
   title: 'À propos — méthodologie & crédits',
   description:
-    'Méthodologie, sources naturalistes et crédits photo (Wikimedia Commons, licences CC) du bestiaire KoikaSamui.',
+    'Méthodologie, sources naturalistes et crédits photo (Wikimedia Commons, licences CC) du bestiaire KoïKoSamui.',
 };
 
 export default function AProposPage() {
@@ -27,7 +27,7 @@ export default function AProposPage() {
           Le projet
         </h2>
         <p>
-          KoikaSamui recense la faune observable à Koh Samui et dans les îles
+          KoïKoSamui recense la faune observable à Koh Samui et dans les îles
           environnantes — Koh Phangan, Koh Tao et le parc marin d’Ang Thong —
           dans le Golfe de Thaïlande. Chaque fiche indique la catégorie, le
           niveau de dangerosité, les lieux d’observation et une description de

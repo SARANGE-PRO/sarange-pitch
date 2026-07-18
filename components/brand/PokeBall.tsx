@@ -6,7 +6,7 @@ import { cn } from '@/lib/cn';
  */
 export function PokeBall({
   className,
-  title = 'KoikaSamui',
+  title = 'KoïKoSamui',
 }: {
   className?: string;
   title?: string;

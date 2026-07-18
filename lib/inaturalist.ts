@@ -10,7 +10,7 @@ import type { Observation } from '@/lib/types';
 import { cleanTaxon } from '@/lib/wikimedia';
 
 const API = 'https://api.inaturalist.org/v1/observations';
-const USER_AGENT = 'KoikaSamui/1.0 (contact@sarange.fr)';
+const USER_AGENT = 'KoiKoSamui/1.0 (contact@sarange.fr)';
 
 // Centre de l'archipel + rayon couvrant Samui, Phangan, Tao et Ang Thong.
 export const ARCHIPELAGO = { lat: 9.75, lng: 99.95, radiusKm: 70 };

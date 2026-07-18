@@ -62,7 +62,7 @@ export function MobileNav({
             <div className="mb-8 flex items-center gap-2.5">
               <PokeBall className="h-7 w-7" />
               <span className="font-display text-lg font-semibold text-ivory">
-                Koika<span className="text-gold">Samui</span>
+                KoïKo<span className="text-gold">Samui</span>
               </span>
             </div>
 

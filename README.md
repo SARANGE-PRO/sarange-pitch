@@ -1,4 +1,4 @@
-# KoikaSamui 🐆🐍🐠
+# KoïKoSamui 🐆🐍🐠
 
 Bestiaire éditorial et interactif de la faune de **Koh Samui** et des îles du
 Golfe de Thaïlande (Koh Phangan, Koh Tao, parc marin d'Ang Thong). ~80 espèces
@@ -141,7 +141,7 @@ Variable optionnelle :
 
 | Variable | Rôle | Défaut |
 |---|---|---|
-| `NEXT_PUBLIC_SITE_URL` | URL canonique (métadonnées, OG, sitemap) | `https://koikasamui.vercel.app` |
+| `NEXT_PUBLIC_SITE_URL` | URL canonique (métadonnées, OG, sitemap) | `https://koikosamui.vercel.app` |
 
 Après avoir configuré votre domaine, définissez `NEXT_PUBLIC_SITE_URL` dans les
 réglages du projet Vercel pour des URLs Open Graph et un sitemap corrects.

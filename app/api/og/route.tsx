@@ -32,7 +32,7 @@ export function GET(req: Request) {
             fontSize: 64,
           }}
         >
-          KoikaSamui
+          KoïKoSamui
         </div>
       ),
       { width: 1200, height: 630 },
@@ -107,7 +107,7 @@ export function GET(req: Request) {
               />
             </div>
             <span style={{ color: '#F4EEDD' }}>
-              KOIKA<span style={{ color: '#C9A227' }}>SAMUI</span>
+              KOÏKO<span style={{ color: '#C9A227' }}>SAMUI</span>
             </span>
           </div>
           <span>SPÉCIMEN N° {no}</span>

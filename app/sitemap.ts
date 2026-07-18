@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next';
 import { getAllSlugs } from '@/lib/species';
 
 const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ?? 'https://koikasamui.vercel.app';
+  process.env.NEXT_PUBLIC_SITE_URL ?? 'https://koikosamui.vercel.app';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = ['', '/especes', '/carte', '/a-propos'].map((path) => ({

@@ -19,7 +19,7 @@ import { CATEGORIES } from '@/data/taxonomy';
 import { FilterBar } from './FilterBar';
 import { SpeciesGrid } from './SpeciesGrid';
 
-const STORAGE_KEY = 'koika:especes';
+const STORAGE_KEY = 'koiko:especes';
 
 function toggle<T>(list: T[], value: T): T[] {
   return list.includes(value)

@@ -12,7 +12,7 @@
 import type { SoundClip } from '@/lib/types';
 import { cleanTaxon } from '@/lib/wikimedia';
 
-const UA = 'KoikaSamui/1.0 (contact@sarange.fr)';
+const UA = 'KoiKoSamui/1.0 (contact@sarange.fr)';
 const CC = /(^cc)|(cc0)|(public domain)/i;
 
 function fmtInatLicense(code?: string): string {

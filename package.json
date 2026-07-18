@@ -1,8 +1,8 @@
 {
-  "name": "koikasamui",
+  "name": "koikosamui",
   "version": "1.0.0",
   "private": true,
-  "description": "KoikaSamui — bestiaire éditorial et interactif de la faune de Koh Samui et des îles du Golfe de Thaïlande.",
+  "description": "KoïKoSamui — bestiaire éditorial et interactif de la faune de Koh Samui et des îles du Golfe de Thaïlande.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

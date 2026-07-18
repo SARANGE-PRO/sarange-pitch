@@ -37,11 +37,11 @@ export function Header() {
         <Link
           href="/"
           className="group flex items-center gap-2.5"
-          aria-label="KoikaSamui — accueil"
+          aria-label="KoïKoSamui — accueil"
         >
           <PokeBall className="h-7 w-7 drop-shadow-[0_0_10px_rgba(201,162,39,0.45)] transition-transform duration-300 group-hover:rotate-[20deg]" />
           <span className="font-display text-lg font-semibold tracking-tight text-ivory">
-            Koika<span className="text-gold">Samui</span>
+            KoïKo<span className="text-gold">Samui</span>
           </span>
         </Link>
 

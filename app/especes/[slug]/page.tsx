@@ -37,7 +37,7 @@ export function generateMetadata({
     title: species.commonName,
     description,
     openGraph: {
-      title: `${species.commonName} · KoikaSamui`,
+      title: `${species.commonName} · KoïKoSamui`,
       description,
       images: [
         {
@@ -50,7 +50,7 @@ export function generateMetadata({
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${species.commonName} · KoikaSamui`,
+      title: `${species.commonName} · KoïKoSamui`,
       description,
       images: [`/api/og?slug=${species.slug}`],
     },

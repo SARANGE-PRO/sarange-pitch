@@ -3,8 +3,8 @@ import type { MetadataRoute } from 'next';
 export default function manifest(): MetadataRoute.Manifest {
   return {
     id: '/',
-    name: 'KoikaSamui — Bestiaire de Koh Samui',
-    short_name: 'KoikaSamui',
+    name: 'KoïKoSamui — Bestiaire de Koh Samui',
+    short_name: 'KoïKoSamui',
     description:
       "Bestiaire de terrain de la faune de Koh Samui et des îles du Golfe de Thaïlande.",
     lang: 'fr',

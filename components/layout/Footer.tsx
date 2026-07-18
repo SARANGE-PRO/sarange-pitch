@@ -12,7 +12,7 @@ export function Footer() {
           <div className="flex items-center gap-2.5">
             <PokeBall className="h-6 w-6" />
             <span className="font-display text-lg font-semibold text-ivory">
-              Koika<span className="text-gold">Samui</span>
+              KoïKo<span className="text-gold">Samui</span>
             </span>
           </div>
           <p className="mt-3 max-w-sm text-sm leading-relaxed text-sand">
@@ -56,7 +56,7 @@ export function Footer() {
             </Link>
             .
           </p>
-          <p>Fiche à visée informative — © {new Date().getFullYear()} KoikaSamui.</p>
+          <p>Fiche à visée informative — © {new Date().getFullYear()} KoïKoSamui.</p>
         </div>
       </div>
     </footer>
