@@ -64,7 +64,7 @@ export function MobileNav({
                 src="/brand/logo.png"
                 alt="KoïKoSamui"
                 width={800}
-                height={343}
+                height={416}
                 unoptimized
                 className="h-9 w-auto"
               />

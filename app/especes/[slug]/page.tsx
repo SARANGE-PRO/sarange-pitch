@@ -14,7 +14,6 @@ import { inaturalistSearchUrl } from '@/lib/inaturalist';
 import { CATEGORY_BY_KEY, DANGER_BY_LEVEL, ZONE_BY_KEY } from '@/data/taxonomy';
 import { SpeciesHero } from '@/components/species/SpeciesHero';
 import { SpeciesMasthead } from '@/components/species/SpeciesMasthead';
-import { FieldBackdrop } from '@/components/species/FieldBackdrop';
 import { CategoryIcon } from '@/components/species/CategoryIcon';
 import { SpeciesGrid } from '@/components/species/SpeciesGrid';
 import { SpeciesCompass } from '@/components/species/SpeciesCompass';
@@ -83,8 +82,6 @@ export default function SpeciesDetailPage({
 
   return (
     <article className="container-editorial py-8 sm:py-12">
-      <FieldBackdrop />
-
       <nav className="flex items-center gap-2 font-mono text-xs text-sand">
         <Link href="/especes" className="transition-colors hover:text-gold">
           ← Toutes les espèces

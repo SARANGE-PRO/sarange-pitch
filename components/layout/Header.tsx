@@ -43,7 +43,7 @@ export function Header() {
             src="/brand/logo.png"
             alt="KoïKoSamui"
             width={800}
-            height={343}
+            height={416}
             priority
             unoptimized
             className="h-9 w-auto drop-shadow-[0_2px_8px_rgba(0,0,0,0.55)] transition-transform duration-300 group-hover:scale-[1.04] sm:h-10"
