@@ -5,6 +5,7 @@ import './globals.css';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { ServiceWorkerRegister } from '@/components/pwa/ServiceWorkerRegister';
+import { ExternalLinkGuard } from '@/components/pwa/ExternalLinkGuard';
 import { ScrollToTop } from '@/components/ui/ScrollToTop';
 
 const fraunces = Fraunces({
@@ -107,6 +108,7 @@ export default function RootLayout({
         <Footer />
         <ScrollToTop />
         <ServiceWorkerRegister />
+        <ExternalLinkGuard />
       </body>
     </html>
   );
