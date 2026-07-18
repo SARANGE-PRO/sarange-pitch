@@ -3,13 +3,14 @@ import { DANGER_BY_LEVEL } from '@/data/taxonomy';
 import { cn } from '@/lib/cn';
 
 /**
- * Jauge de dangerosité graphique et segmentée (5 crans).
- * La couleur code la sévérité (émeraude vif → ambre → laque rouge), le
- * remplissage code l'ampleur. Un état « Inoffensif » allume les premiers crans
- * en vert émeraude vibrant, texte assorti.
+ * Jauge de dangerosité — 3 crans = 3 niveaux, remplissage cumulatif.
+ *   Inoffensif → 1/3 (vert émeraude)   « reste dans le vert »
+ *   Prudence   → 2/3 (ambre)
+ *   Dangereux  → 3/3 (laque rouge)
+ * La barre se remplit de « Faible » vers « Élevé » : plus c'est rempli et chaud,
+ * plus c'est dangereux. Pas de nombre trompeur.
  */
-const SEG_COUNT = 5;
-const FILL: Record<DangerLevel, number> = { 0: 2, 1: 3, 2: 5 };
+const SEG_COUNT = 3;
 
 const TONE: Record<DangerLevel, { fill: string; glow: string; text: string }> = {
   0: {
@@ -38,7 +39,7 @@ export function DangerGauge({
 }) {
   const meta = DANGER_BY_LEVEL[level];
   const tone = TONE[level];
-  const filled = FILL[level];
+  const filled = level + 1; // 1, 2 ou 3 crans
 
   return (
     <div className={cn('flex flex-col gap-2.5', className)}>
@@ -46,12 +47,11 @@ export function DangerGauge({
         <span className="eyebrow !text-sand">Dangerosité</span>
         <span
           className={cn(
-            'flex items-baseline gap-2 font-mono text-xs uppercase tracking-wider',
+            'font-mono text-xs font-semibold uppercase tracking-wider',
             tone.text,
           )}
         >
-          <span className="font-semibold">{meta.label}</span>
-          <span className="text-sand/60">{level} / 2</span>
+          {meta.label}
         </span>
       </div>
 
@@ -61,7 +61,7 @@ export function DangerGauge({
         aria-valuemin={0}
         aria-valuemax={2}
         aria-valuenow={level}
-        aria-label={`Dangerosité : ${meta.label} (${level} sur 2)`}
+        aria-label={`Dangerosité : ${meta.label} (niveau ${level} sur 2)`}
       >
         {Array.from({ length: SEG_COUNT }).map((_, i) => {
           const on = i < filled;

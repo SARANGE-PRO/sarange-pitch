@@ -1,6 +1,6 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { NAV_LINKS } from './nav-links';
-import { PokeBall } from '@/components/brand/PokeBall';
 import { getAllSpecies } from '@/lib/species';
 
 export function Footer() {
@@ -9,12 +9,14 @@ export function Footer() {
     <footer className="pb-safe mt-24 border-t border-line">
       <div className="container-editorial grid grid-cols-1 gap-10 py-14 sm:grid-cols-2 lg:grid-cols-4">
         <div className="sm:col-span-2 lg:col-span-2">
-          <div className="flex items-center gap-2.5">
-            <PokeBall className="h-6 w-6" />
-            <span className="font-display text-lg font-semibold text-ivory">
-              KoïKo<span className="text-gold">Samui</span>
-            </span>
-          </div>
+          <Image
+            src="/brand/logo.png"
+            alt="KoïKoSamui"
+            width={800}
+            height={416}
+            unoptimized
+            className="h-10 w-auto"
+          />
           <p className="mt-3 max-w-sm text-sm leading-relaxed text-sand">
             Bestiaire de terrain de la faune du Golfe de Thaïlande — Koh Samui,
             Koh Phangan, Koh Tao et le parc marin d’Ang Thong. {total} spécimens
