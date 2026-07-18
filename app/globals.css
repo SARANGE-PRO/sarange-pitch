@@ -248,16 +248,6 @@
     border-radius: 16px 6px 16px 6px;
   }
 
-  /* Lettrine de carnet — première lettre en or chaud, serif */
-  .dropcap::first-letter {
-    float: left;
-    margin: 0.02em 0.14em 0 0;
-    font-family: var(--font-fraunces);
-    font-weight: 300;
-    font-size: 3.4em;
-    line-height: 0.78;
-    color: var(--color-gold-warm);
-  }
 }
 
 /* ---------------------------------------------------------------- Leaflet */

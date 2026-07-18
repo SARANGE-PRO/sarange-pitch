@@ -101,7 +101,7 @@ export default function SpeciesDetailPage({
           <h2 className="mt-2 font-display text-2xl font-semibold text-ivory">
             À propos de l’espèce
           </h2>
-          <p className="dropcap mt-5 text-[17px] leading-[1.8] text-ivory/90">
+          <p className="mt-5 text-[17px] leading-[1.8] text-ivory/90">
             {species.longDescription}
           </p>
         </div>
