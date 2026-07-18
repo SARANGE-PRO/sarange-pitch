@@ -115,7 +115,7 @@ export default function HomePage() {
       </section>
 
       {/* -------------------------------------------------------- SIGNATURE */}
-      <section className="border-t border-line bg-lacquer/30">
+      <section className="border-t border-line">
         <div className="container-editorial py-20">
           <div className="mb-10">
             <p className="eyebrow">Spécimens signatures</p>

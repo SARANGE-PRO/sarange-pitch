@@ -24,7 +24,7 @@ export function ActiveNow({ species }: { species: Species[] }) {
   useEffect(() => setPeriod(samuiPeriod()), []);
 
   return (
-    <section className="border-y border-line bg-lacquer/30">
+    <section className="border-y border-line">
       <div className="container-editorial py-16">
         <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
