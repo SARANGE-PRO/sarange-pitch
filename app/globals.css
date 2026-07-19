@@ -56,6 +56,14 @@
     mix-blend-mode: screen;
   }
 
+  /* Cache plein écran de l'animation d'ouverture (créé par script si besoin) */
+  #intro-cover {
+    position: fixed;
+    inset: 0;
+    z-index: 199;
+    background: var(--color-night);
+  }
+
   ::selection {
     background: rgba(201, 162, 39, 0.28);
     color: var(--color-ivory);

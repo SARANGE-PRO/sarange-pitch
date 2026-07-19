@@ -1,5 +1,5 @@
 /* KoïKoSamui — service worker (PWA installable + hors-ligne « jungle proof ») */
-const VERSION = 'koikosamui-v3';
+const VERSION = 'koikosamui-v4';
 const IMG_CACHE = 'koiko-img-v1';
 const KEEP = [VERSION, IMG_CACHE];
 const IMG_MAX = 120; // plafond LRU du cache images
@@ -78,6 +78,15 @@ self.addEventListener('fetch', (event) => {
   if (request.method !== 'GET') return;
 
   const url = new URL(request.url);
+
+  // Vidéos (animation d'ouverture…) : laisser le navigateur gérer les
+  // requêtes Range — ne pas intercepter ni mettre en cache.
+  if (
+    request.destination === 'video' ||
+    /\.(mov|mp4|m4v|webm)(\?|$)/i.test(url.pathname)
+  ) {
+    return;
+  }
 
   // Images distantes (Wikimedia / iNaturalist) — cache dédié plafonné.
   if (IMG_HOSTS.has(url.hostname)) {

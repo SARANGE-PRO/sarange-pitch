@@ -6,6 +6,7 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { ServiceWorkerRegister } from '@/components/pwa/ServiceWorkerRegister';
 import { ExternalLinkGuard } from '@/components/pwa/ExternalLinkGuard';
+import { SplashScreen } from '@/components/pwa/SplashScreen';
 import { ScrollToTop } from '@/components/ui/ScrollToTop';
 
 const fraunces = Fraunces({
@@ -97,6 +98,15 @@ export default function RootLayout({
       className={`${fraunces.variable} ${chakra.variable} ${plexMono.variable}`}
     >
       <body className="min-h-screen antialiased">
+        {/* Animation d'ouverture : le script pose un drapeau + un cache plein
+            écran (hors arbre React) pour éviter le flash de l'app avant le
+            splash. SplashScreen prend le relais et retire le cache. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{if(!sessionStorage.getItem('koiko:intro-seen')&&!matchMedia('(prefers-reduced-motion:reduce)').matches){window.__koikoIntro=true;var c=document.createElement('div');c.id='intro-cover';document.documentElement.appendChild(c);}}catch(e){}",
+          }}
+        />
         <a
           href="#contenu"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded focus:bg-gold focus:px-4 focus:py-2 focus:font-ui focus:text-sm focus:text-night"
@@ -109,6 +119,7 @@ export default function RootLayout({
         <ScrollToTop />
         <ServiceWorkerRegister />
         <ExternalLinkGuard />
+        <SplashScreen />
       </body>
     </html>
   );
