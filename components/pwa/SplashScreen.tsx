@@ -81,28 +81,53 @@ export function SplashScreen() {
         phase === 'leaving' ? 'pointer-events-none opacity-0' : 'opacity-100',
       )}
     >
-      <video
-        ref={videoRef}
-        src="/brand/intro.mov"
-        muted
-        autoPlay
-        playsInline
-        preload="auto"
-        onEnded={leave}
-        onError={leave}
-        className="h-full w-full object-cover lg:object-contain"
-      />
-      <button
-        type="button"
-        onClick={(e) => {
-          e.stopPropagation();
-          leave();
-        }}
-        aria-label="Passer l'animation d'ouverture"
-        className="pb-safe absolute bottom-6 right-6 rounded-full border border-white/25 bg-black/35 px-4 py-2 font-mono text-[11px] uppercase tracking-wider text-white/90 backdrop-blur-sm transition-colors hover:bg-black/55"
-      >
-        Passer ›
-      </button>
+      <div className="relative h-full w-full overflow-hidden lg:h-auto lg:aspect-[9/16] lg:max-h-[94vh] lg:w-auto lg:rounded-[22px] lg:shadow-[0_40px_120px_-30px_rgba(0,0,0,0.9)]">
+        <video
+          ref={videoRef}
+          src="/brand/intro.mov"
+          muted
+          autoPlay
+          playsInline
+          preload="auto"
+          onEnded={leave}
+          onError={leave}
+          className="h-full w-full object-cover"
+        />
+
+        {/* Dégradé bas : masque la marque de génération + assoit le bouton */}
+        <div
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-[30%] bg-gradient-to-t from-night via-night/55 to-transparent"
+          aria-hidden
+        />
+
+        {/* Bouton « Passer » — verre premium doré */}
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            leave();
+          }}
+          aria-label="Passer l'animation d'ouverture"
+          style={{
+            bottom: 'max(1.25rem, calc(0.75rem + env(safe-area-inset-bottom)))',
+          }}
+          className="group absolute right-5 z-10 inline-flex items-center gap-2 rounded-full border border-gold/35 bg-white/10 px-4 py-2 font-mono text-[11px] uppercase tracking-[0.2em] text-ivory shadow-[0_6px_24px_rgba(0,0,0,0.45)] backdrop-blur-md transition-all duration-200 hover:border-gold/70 hover:bg-white/[0.16] hover:text-gold active:scale-95"
+        >
+          Passer
+          <svg
+            className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden
+          >
+            <path d="M7 5l6 7-6 7M14 5l6 7-6 7" />
+          </svg>
+        </button>
+      </div>
     </div>,
     document.body,
   );
