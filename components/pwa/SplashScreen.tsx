@@ -99,6 +99,11 @@ export function SplashScreen() {
           className="pointer-events-none absolute inset-x-0 bottom-0 h-[30%] bg-gradient-to-t from-night via-night/55 to-transparent"
           aria-hidden
         />
+        {/* Masque flou ciblé sur le coin bas-droit (marque de génération) */}
+        <div
+          className="pointer-events-none absolute bottom-[4%] right-[3%] h-28 w-28 rounded-full bg-night/80 blur-2xl"
+          aria-hidden
+        />
 
         {/* Bouton « Passer » — verre premium doré */}
         <button
