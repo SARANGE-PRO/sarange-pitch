@@ -96,12 +96,16 @@ export function SplashScreen() {
 
         {/* Dégradé bas : masque la marque de génération + assoit le bouton */}
         <div
-          className="pointer-events-none absolute inset-x-0 bottom-0 h-[30%] bg-gradient-to-t from-night via-night/55 to-transparent"
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-[32%] bg-gradient-to-t from-night via-night/60 to-transparent"
           aria-hidden
         />
-        {/* Masque flou ciblé sur le coin bas-droit (marque de génération) */}
+        {/* Masque radial centré sur la marque de génération (≈8% droite, 15% bas) */}
         <div
-          className="pointer-events-none absolute bottom-[4%] right-[3%] h-28 w-28 rounded-full bg-night/80 blur-2xl"
+          className="pointer-events-none absolute bottom-[2%] right-[-22%] h-56 w-56 rounded-full"
+          style={{
+            background:
+              'radial-gradient(circle, #0b1a15 0%, rgba(11,26,21,0.92) 40%, transparent 72%)',
+          }}
           aria-hidden
         />
 
