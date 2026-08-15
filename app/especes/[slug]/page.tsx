@@ -138,6 +138,14 @@ export default function SpeciesDetailPage({
             <SheetRow label="Zones">
               {species.zones.map((z) => ZONE_BY_KEY[z].label).join(', ')}
             </SheetRow>
+            {species.facts && (
+              <>
+                <SheetRow label="Taille">{species.facts.size}</SheetRow>
+                <SheetRow label="Poids">{species.facts.weight}</SheetRow>
+                <SheetRow label="Longévité">{species.facts.lifespan}</SheetRow>
+                <SheetRow label="Régime">{species.facts.diet}</SheetRow>
+              </>
+            )}
           </dl>
         </aside>
       </section>
