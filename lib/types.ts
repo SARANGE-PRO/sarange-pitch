@@ -36,6 +36,18 @@ export interface ObservationSpot {
   lng: number;
 }
 
+/** Mensurations et repères de la fiche technique */
+export interface SpeciesFacts {
+  /** taille adulte : longueur, envergure, hauteur au garrot… */
+  size: string;
+  /** poids adulte (fourchette typique) */
+  weight: string;
+  /** longévité typique */
+  lifespan: string;
+  /** régime alimentaire */
+  diet: string;
+}
+
 export interface Species {
   slug: string;
   commonName: string;
@@ -45,6 +57,8 @@ export interface Species {
   zones: ObservationZone[];
   /** rythme d'activité */
   activity: Activity;
+  /** taille, poids, longévité, régime (fiche technique) */
+  facts?: SpeciesFacts;
   /** emoji du carnet de terrain (repère visuel de secours) */
   icon: string;
   shortNote: string; // description courte (liste)

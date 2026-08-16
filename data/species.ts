@@ -8,7 +8,7 @@ import type { Species } from '@/lib/types';
  * Source du corpus : prototype « Bestiaire de Koh Samui », enrichi
  * (descriptions longues, slugs, zones normalisées).
  */
-export type SpeciesBase = Omit<Species, 'photos' | 'activity'>;
+export type SpeciesBase = Omit<Species, 'photos' | 'activity' | 'facts'>;
 
 export const speciesBase: SpeciesBase[] = [
   // ---------------------------------------------------------------- MAMMIFÈRES

@@ -1,6 +1,7 @@
 import type { PhotoCredit, Species } from '@/lib/types';
 import { speciesBase } from '@/data/species';
 import { ACTIVITY } from '@/data/activity';
+import { FACTS } from '@/data/facts';
 import photosJson from '@/data/photos.json';
 
 /**
@@ -13,6 +14,7 @@ export const allSpecies: Species[] = speciesBase.map((base) => ({
   ...base,
   photos: photos[base.slug] ?? [],
   activity: ACTIVITY[base.slug] ?? 'variable',
+  facts: FACTS[base.slug],
 }));
 
 const bySlug = new Map(allSpecies.map((s) => [s.slug, s]));
